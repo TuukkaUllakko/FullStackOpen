@@ -20,9 +20,10 @@ note over browser:
 page reloads
 end note
 
-server->browser: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
-browser->server: main.css
-server->browser: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server->browser: main.js
 
 note over browser:
 browser executes js-code
