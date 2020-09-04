@@ -1,0 +1,25 @@
+title User opens spa example page (ex 0.5)
+
+note over browser:
+user opens page / refreshes
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser: HTML-code for the page
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: spa.js
+
+note over browser:
+browser executes js-code
+requesting JSON data from server
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: JSON data of notes ([{content: "x", date: "y"}, ...])
+
+note over browser:
+browser executes the event handler
+that renders notes to display
+end note
