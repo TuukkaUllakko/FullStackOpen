@@ -31,29 +31,29 @@ const Statistics = ({ good, bad, neutral }) => {
   }
 
   return (
-      <table>
-        <tbody>
-          <tr>
-            <td><StatisticLine text="good"/></td><td><StatisticLine value={good} /></td>
-          </tr>
-          <tr>
-            <td><StatisticLine text="neutral"/></td><td><StatisticLine value={neutral} /></td>
-          </tr>
-          <tr>
-            <td><StatisticLine text="bad"/></td><td><StatisticLine value={bad} /></td>
-          </tr>
-          <tr>
-            <td><StatisticLine text="all"/></td><td><StatisticLine value={allFeedback} /></td>
-          </tr>
-          <tr>
-            <td><StatisticLine text="average"/></td><td><StatisticLine value={average} /></td>
-          </tr>
-          <tr>
-            <td><StatisticLine text="positive"/></td><td><StatisticLine value={posPrcnt} /></td>
-          </tr>
-        </tbody>
-      </table>
-  )
+    <table>
+      <tbody>
+        <tr>
+          <td><StatisticLine text="good"/></td><td><StatisticLine value={good} /></td>
+        </tr>
+        <tr>
+          <td><StatisticLine text="neutral"/></td><td><StatisticLine value={neutral} /></td>
+        </tr>
+        <tr>
+          <td><StatisticLine text="bad"/></td><td><StatisticLine value={bad} /></td>
+        </tr>
+        <tr>
+          <td><StatisticLine text="all"/></td><td><StatisticLine value={allFeedback} /></td>
+        </tr>
+        <tr>
+          <td><StatisticLine text="average"/></td><td><StatisticLine value={average} /></td>
+        </tr>
+        <tr>
+          <td><StatisticLine text="positive"/></td><td><StatisticLine value={posPrcnt} /></td>
+        </tr>
+      </tbody>
+    </table>
+)
 }
 
 const StatisticLine = ({ text, value }) => {
@@ -79,7 +79,6 @@ const App = () => {
       <h1>statistics</h1>
 
       <Statistics good={good} neutral={neutral} bad={bad} />
-
     </div>
   )
 }
