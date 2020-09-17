@@ -7,7 +7,7 @@ const Button = (props) => (
   </button>
 )
 
-let Randomizer = random => {
+let Random0to5 = () => {
   let randomNum = Math.floor(Math.random() * 6)
   return randomNum
 }
@@ -19,14 +19,12 @@ const App = (props) => {
     setSelected(newValue)
   }
 
-  const Random = Randomizer
-
   return (
     <div>
       {props.anecdotes[selected]}
       <br></br>
-      {console.log(Random)}
-      <Button handleClick={() => setValue(Random)} text="next anecdote"/>
+      {console.log(Random0to5)}
+      <Button handleClick={() => setValue(Random0to5)} text="next anecdote"/>
     </div>
     
   )
