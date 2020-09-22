@@ -7,30 +7,46 @@ const Button = (props) => (
   </button>
 )
 
-let Random0to5 = () => {
-  let randomNum = Math.floor(Math.random() * 6)
-  return randomNum
-}
-
 const App = (props) => {
-  const [selected, setSelected] = useState(0)
 
-  const setValue = newValue => {
-    setSelected(newValue)
+  const emptyArray = Array.apply(null, new Array(7)).map(Number.prototype.valueOf,0)
+
+  const [selected, setSelected] = useState(emptyArray)
+
+  const RandomNum = () => {
+
+    let randomNum = Math.floor(Math.random() * 6)
+
+    while (randomNum === selected[0]) //To make sure an anecdote isn't shown twice in a row
+    {
+      randomNum = Math.floor(Math.random() * 6)
+    }
+
+    const copy = [...selected]
+    copy[0] = randomNum
+    setSelected(copy)
+  }
+
+  const addVote = () => {
+    const copy = [...selected]
+    copy[selected[0] + 1]++
+    console.log(copy)
+    setSelected(copy)
   }
 
   return (
     <div>
-      {props.anecdotes[selected]}
-      <br></br>
-      {console.log(Random0to5)}
-      <Button handleClick={() => setValue(Random0to5)} text="next anecdote"/>
+      <h1>Anecdote of the day</h1>
+      {props.anecdotes[selected[0]]}
+      <div>has {selected[selected[0] + 1]} points.</div>
+      <Button handleClick={() => addVote()} text="vote"/>
+      <Button handleClick={() => RandomNum()} text="next anecdote"/>
     </div>
     
   )
 }
 
-const anecdotes = [
+const anecdotes = [ 
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
   'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
