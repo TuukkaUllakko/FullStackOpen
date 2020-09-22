@@ -13,11 +13,15 @@ const App = (props) => {
 
   const [selected, setSelected] = useState(emptyArray)
 
+  const setValue = newValue => {
+    setSelected(newValue)
+  }
+
   const RandomNum = () => {
 
     let randomNum = Math.floor(Math.random() * 6)
 
-    while (randomNum === selected[0]) //To make sure an anecdote isn't shown twice in a row
+    while (randomNum === selected[0]) //To make sure an anecdote isn't shown twice in a row (so that "next anecdote" is more like what it actually says)
     {
       randomNum = Math.floor(Math.random() * 6)
     }
@@ -31,7 +35,15 @@ const App = (props) => {
     const copy = [...selected]
     copy[selected[0] + 1]++
     console.log(copy)
-    setSelected(copy)
+    setValue(copy)
+  }
+
+  const maxVotedIndex = () => {
+    const copy = [...selected]
+    copy.shift()
+    let maxVotesInd = copy.indexOf(Math.max(...copy))
+    return maxVotesInd
+
   }
 
   return (
@@ -41,6 +53,9 @@ const App = (props) => {
       <div>has {selected[selected[0] + 1]} points.</div>
       <Button handleClick={() => addVote()} text="vote"/>
       <Button handleClick={() => RandomNum()} text="next anecdote"/>
+      <h1>Anecdote with most votes</h1>
+      <div>{props.anecdotes[maxVotedIndex()]}</div>
+      <div>has {selected[maxVotedIndex() + 1]} votes</div>
     </div>
     
   )
