@@ -13,7 +13,7 @@ const App = () => {
     persons.forEach(person => {
       if(person.name === newName)
       {
-        window.confirm(`${newName} is already added to phonebook`)
+        window.alert(`${newName} is already added to phonebook`)
         nameChecker = 1
         return
       }
