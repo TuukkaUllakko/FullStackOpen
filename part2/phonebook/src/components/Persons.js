@@ -11,6 +11,12 @@ const Persons = ({persons, filter}) => {
           </div>
         )
       }
+      else
+      {
+        return (
+          <div></div>
+        )
+      }
       })
     return (
         Persons
