@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Persons = ({persons, filter}) => {
-    const Persons = persons.map(person => {
+    const People = persons.map(person => {
       console.log(person.name.toUpperCase())
       if (person.name.toUpperCase().includes(filter.toUpperCase()))
       {
@@ -19,7 +19,7 @@ const Persons = ({persons, filter}) => {
       }
       })
     return (
-        Persons
+        People
     )
 }
 
