@@ -9,7 +9,7 @@ const Persons = ({persons, filter}) => {
 
     return (
       <div>
-        {personFilter.map(person => <div key={person.name}>{person.name}</div>)}
+        {personFilter.map(person => <div key={person.name}>{person.name} {person.number}</div>)}
       </div>
     )
 }
