@@ -15,30 +15,26 @@ const Countries = ({countries, filter, setNewFilter}) => {
     else if (CountryFilter.length === 1)
     {
       const API_KEY = process.env.REACT_APP_API_KEY;
-      console.log(API_KEY)
 
         return (
-          <div>
             <div>
             {CountryFilter
             .map(country =><div key={country.name}>
                 <h1>{country.name}</h1>
-                <p>capital {country.capital}</p>
-                <p>population {country.population}</p>
+                <p><b>Capital:</b> {country.capital}</p>
+                <p><b>Population:</b> {country.population}</p>
                 <img src={country.flag} alt="flag of searched country"
                 width="200px"/>
-                <h2>languages</h2>
+                <h2>Spoken languages</h2>
                 <ul>
                     {country.languages.map(language => <li key={language.name}>
                         {language.name}
                     </li>)}
                 </ul>
+                    <h2>Weather in {country.capital}</h2>
+                <Weather city={country.capital.toLowerCase()} API_KEY={API_KEY}/>
               </div>)}
             </div>
-            <div>
-              <Weather city={CountryFilter.name} API_KEY={API_KEY}/>
-            </div>
-          </div>
         )
     }
     else
@@ -66,17 +62,29 @@ const Countries = ({countries, filter, setNewFilter}) => {
 const Weather = ({city, API_KEY}) => {
   let [dataOfCity, setDataOfCity] = useState({})
 
-  /*useEffect(() => {
+  useEffect(() => {
     axios
-    .get()
+    .get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
     .then(response => {
       setDataOfCity(response.data)
     })
-  }, [])*/
+  }, [city, API_KEY])
 
   return (
+    //Math.round(dataOfCity.main.temp - 273.15)
     <div>
-      {dataOfCity.name}
+      <div>
+        {dataOfCity.cod === 200
+        ?
+        <div>
+          <div><b>Temperature:</b> {Math.round(dataOfCity.main.temp - 273.15)} &deg; celcius</div>
+          <div><b>Weather:</b> {dataOfCity.weather[0].description}</div>
+          <img src={`http://openweathermap.org/img/wn/${dataOfCity.weather[0].icon}@2x.png`} alt="Wheather Icon" />
+          <div><b>Humidity: </b> {dataOfCity.main.humidity}%</div>
+          <div><b>Wind:</b> {dataOfCity.wind.speed} m/s</div>
+        </div>
+        : null}
+      </div>
     </div>
   )
 }
