@@ -23,7 +23,7 @@ const App = () => {
   return (
     <div>
       <FilterForm value={newFilter} onChange={filterOnChange}/>
-      <Countries countries={countries} filter={newFilter}/>
+      <Countries countries={countries} filter={newFilter} setNewFilter={setNewFilter}/>
     </div>
   )
 }
