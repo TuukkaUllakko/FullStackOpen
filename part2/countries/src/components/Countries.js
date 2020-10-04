@@ -34,7 +34,7 @@ const Countries = ({countries, filter, setNewFilter}) => {
     }
     else
     {
-        const onClickShow = ({name}) => {
+        const onClickShow = (name) => {
             setNewFilter(name)
           }
 
