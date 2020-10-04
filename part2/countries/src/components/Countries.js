@@ -79,7 +79,7 @@ const Weather = ({city, API_KEY}) => {
         <div>
           <div><b>Temperature:</b> {Math.round(dataOfCity.main.temp - 273.15)} &deg; celcius</div>
           <div><b>Weather:</b> {dataOfCity.weather[0].description}</div>
-          <img src={`http://openweathermap.org/img/wn/${dataOfCity.weather[0].icon}@2x.png`} alt="Wheather Icon" />
+          <img src={`http://openweathermap.org/img/wn/${dataOfCity.weather[0].icon}@2x.png`} alt="Weather Icon" />
           <div><b>Humidity: </b> {dataOfCity.main.humidity}%</div>
           <div><b>Wind:</b> {dataOfCity.wind.speed} m/s</div>
         </div>
