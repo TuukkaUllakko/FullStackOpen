@@ -15,6 +15,7 @@ const Countries = ({countries, filter, setNewFilter}) => {
     else if (CountryFilter.length === 1)
     {
       const API_KEY = process.env.REACT_APP_API_KEY;
+      console.log(API_KEY)
 
         return (
           <div>
@@ -65,17 +66,17 @@ const Countries = ({countries, filter, setNewFilter}) => {
 const Weather = ({city, API_KEY}) => {
   let [dataOfCity, setDataOfCity] = useState({})
 
-  useEffect(() => {
+  /*useEffect(() => {
     axios
     .get()
     .then(response => {
       setDataOfCity(response.data)
     })
-  }, [city, API_KEY])
+  }, [])*/
 
   return (
     <div>
-
+      {dataOfCity.name}
     </div>
   )
 }
