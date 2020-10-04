@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Countries = ({countries, filter, setNewFilter}) => {
 
@@ -13,7 +14,10 @@ const Countries = ({countries, filter, setNewFilter}) => {
 
     else if (CountryFilter.length === 1)
     {
+      const API_KEY = process.env.REACT_APP_API_KEY;
+
         return (
+          <div>
             <div>
             {CountryFilter
             .map(country =><div key={country.name}>
@@ -28,8 +32,12 @@ const Countries = ({countries, filter, setNewFilter}) => {
                         {language.name}
                     </li>)}
                 </ul>
-            </div>)}
-        </div>
+              </div>)}
+            </div>
+            <div>
+              <Weather city={CountryFilter.name} API_KEY={API_KEY}/>
+            </div>
+          </div>
         )
     }
     else
@@ -52,6 +60,24 @@ const Countries = ({countries, filter, setNewFilter}) => {
           )
     }
 
+}
+
+const Weather = ({city, API_KEY}) => {
+  let [dataOfCity, setDataOfCity] = useState({})
+
+  useEffect(() => {
+    axios
+    .get()
+    .then(response => {
+      setDataOfCity(response.data)
+    })
+  }, [city, API_KEY])
+
+  return (
+    <div>
+
+    </div>
+  )
 }
 
 export default Countries
