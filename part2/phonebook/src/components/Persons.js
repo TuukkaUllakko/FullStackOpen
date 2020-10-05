@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Persons = ({persons, filter}) => {
+const Persons = ({persons, filter, onClick}) => {
 
     const personFilter = filter.length === 0
     ? persons
@@ -9,7 +9,8 @@ const Persons = ({persons, filter}) => {
 
     return (
       <div>
-        {personFilter.map(person => <div key={person.name}>{person.name} {person.number}</div>)}
+        {personFilter.map(person => <div key={person.id}>{person.name} {person.number}
+        <button onClick={() => onClick(person.id, person.name)}>delete</button></div>)}
       </div>
     )
 }
