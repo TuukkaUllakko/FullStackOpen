@@ -3,12 +3,16 @@ import Filter from './components/Filter.js'
 import PersForm from './components/PersForm.js'
 import Persons from './components/Persons.js'
 import phoneService from './services/persons'
+import AddedNotification from './components/AddedNotification.js'
+import ErrorNotification from './components/ErrorNotification.js'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [newMsg, setNewMsg] = useState(null)
+  const [newErrMsg, setNewErrmsg] = useState(null)
 
   useEffect(() => {
     phoneService
@@ -43,6 +47,14 @@ const App = () => {
             setNewName('')
             setNewNumber('')
           })
+          .catch(error => {
+            setNewErrmsg({ message: `Information of ${personObject.name} has already been removed from server`})
+            setTimeout(() => {
+              setNewErrmsg(null)
+            }, 5000)
+            setNewName('')
+            setNewNumber('')
+          })
         }
         nameChecker = 1
         return
@@ -56,6 +68,15 @@ const App = () => {
           setPersons(persons.concat(personData))
           setNewName('')
           setNewNumber('')
+
+          const message = {
+            message: `Added ${personObject.name}`
+          }
+          setNewMsg(message)
+          setTimeout(() => {
+            setNewMsg(null)
+          }, 5000)
+
         })
     }
   }
@@ -88,6 +109,9 @@ const App = () => {
     return (
       <div>
         <h2>Phonebook</h2>
+
+        <AddedNotification message={newMsg} />
+        <ErrorNotification message={newErrMsg} />
 
         <Filter value={newFilter} onChange={handleFilterChange} />
 
