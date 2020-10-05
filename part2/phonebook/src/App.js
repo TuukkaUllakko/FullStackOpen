@@ -40,6 +40,8 @@ const App = () => {
           .update(id, personObject)
           .then(newPerson => {
             setPersons(persons.map(person => person.id !== id ? person : newPerson))
+            setNewName('')
+            setNewNumber('')
           })
         }
         nameChecker = 1
