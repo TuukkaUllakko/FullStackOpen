@@ -1,7 +1,7 @@
 import React from 'react'
 import '../index.css'
 
-const AddedNotification = ({ message }) => {
+const ErrorNotification = ({ message }) => {
     if (message === null) {
       return null
     }
@@ -13,4 +13,4 @@ const AddedNotification = ({ message }) => {
     )
   }
 
-export default AddedNotification
+export default ErrorNotification

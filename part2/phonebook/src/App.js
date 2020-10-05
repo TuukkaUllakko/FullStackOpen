@@ -48,7 +48,7 @@ const App = () => {
             setNewNumber('')
           })
           .catch(error => {
-            setNewErrmsg({ message: `Information of ${personObject.name} has already been removed from server`})
+            setNewErrmsg({ message: `Information of ${personObject.name} has already been removed from server, please refresh the page`})
             setTimeout(() => {
               setNewErrmsg(null)
             }, 5000)
