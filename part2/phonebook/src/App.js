@@ -24,67 +24,60 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
-
+    
     const personObject = {
       name: newName,
       number: newNumber
     }
 
-    let changeNumber
-    let nameChecker
-
-    persons.forEach(person => {
-      if (person.name === newName) {
-        changeNumber = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
-        if (changeNumber)
-        {
-          let getPerson = persons.find(person => person.name === newName)
-          let id = getPerson.id
-          phoneService
+    if (persons.map(person =>
+      person.name)
+      .includes(newName)) {
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        let getID = persons.find(item => item.name === newName)
+        let id = getID.id
+        phoneService
           .update(id, personObject)
-          .then(newPerson => {
-            setPersons(persons.map(person => person.id !== id ? person : newPerson))
-            setNewName('')
-            setNewNumber('')
+          .then(updatedPerson => {
+            setPersons(persons.map(person => person.id !== id ? person : updatedPerson))
+            setNewName("")
+            setNewNumber("")
           })
           .catch(error => {
-            setNewErrmsg({ message: `Information of ${personObject.name} has already been removed from server, please refresh the page`})
+            const message = {
+              message: `Information of ${personObject.name} has already been removed from server`,
+            }
+            setNewErrmsg(message)
             setTimeout(() => {
-              setNewErrmsg(null)
+              setNewMessage(null)
             }, 5000)
-            setNewName('')
-            setNewNumber('')
+            setNewName("")
+            setNewNumber("")
           })
-        }
-        nameChecker = 1
-        return
       }
-    })
-
-    if (nameChecker !== 1) {
+    }
+    else {
       phoneService
         .create(personObject)
-        .then(personData => {
-          setPersons(persons.concat(personData))
-          setNewName('')
-          setNewNumber('')
-
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setNewName("")
+          setNewNumber("")
           const message = {
-            message: `Added ${personObject.name}`
+            message: `Added ${personObject.name}`,
           }
-          setNewMsg(message)
+          setNewMessage(message)
           setTimeout(() => {
-            setNewMsg(null)
+            setNewMessage(null)
           }, 5000)
+        }).catch(error => {
 
-        })
-        .catch(error => {
           const message = {
-            message: `${error.response.data.error}`
+            message: `${error.response.data.error}`,
           }
           setNewErrmsg(message)
           setTimeout(() => {
-            setNewErrmsg(null)
+            setNewMessage(null)
           }, 5000)
         })
     }
