@@ -33,7 +33,7 @@ const App = () => {
     let changeNumber
     let nameChecker
 
-    /*persons.forEach(person => {
+    persons.forEach(person => {
       if (person.name === newName) {
         changeNumber = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
         if (changeNumber)
@@ -59,7 +59,7 @@ const App = () => {
         nameChecker = 1
         return
       }
-    })*/
+    })
 
     if (nameChecker !== 1) {
       phoneService
@@ -77,6 +77,12 @@ const App = () => {
             setNewMsg(null)
           }, 5000)
 
+        })
+        .catch(error => {
+          setNewErrmsg(error.response.data)
+          setTimeout(() => {
+            setNewErrmsg(null)
+          }, 5000)
         })
     }
   }
