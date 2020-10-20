@@ -80,7 +80,7 @@ const App = () => {
         })
         .catch(error => {
           const message = {
-            message: error.response.data.error.message
+            message: `${error.response.data.error}`
           }
           setNewErrmsg(message)
           setTimeout(() => {
