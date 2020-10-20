@@ -24,7 +24,7 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
-    
+
     const personObject = {
       name: newName,
       number: newNumber
@@ -49,7 +49,7 @@ const App = () => {
             }
             setNewErrmsg(message)
             setTimeout(() => {
-              setNewMessage(null)
+              setNewErrmsg(null)
             }, 5000)
             setNewName("")
             setNewNumber("")
@@ -68,7 +68,7 @@ const App = () => {
           }
           setNewMessage(message)
           setTimeout(() => {
-            setNewMessage(null)
+            setNewErrmsg(null)
           }, 5000)
         }).catch(error => {
 
@@ -77,7 +77,7 @@ const App = () => {
           }
           setNewErrmsg(message)
           setTimeout(() => {
-            setNewMessage(null)
+            setNewErrmsg(null)
           }, 5000)
         })
     }
