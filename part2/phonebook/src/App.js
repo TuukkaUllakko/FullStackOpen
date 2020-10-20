@@ -66,7 +66,7 @@ const App = () => {
           const message = {
             message: `Added ${personObject.name}`,
           }
-          setNewMessage(message)
+          setNewErrmsg(message)
           setTimeout(() => {
             setNewErrmsg(null)
           }, 5000)
