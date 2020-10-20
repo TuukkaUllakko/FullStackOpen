@@ -66,9 +66,9 @@ const App = () => {
           const message = {
             message: `Added ${personObject.name}`,
           }
-          setNewErrmsg(message)
+          setNewMsg(message)
           setTimeout(() => {
-            setNewErrmsg(null)
+            setNewMsg(null)
           }, 5000)
         }).catch(error => {
 
