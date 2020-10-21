@@ -44,6 +44,7 @@ const App = () => {
             setNewNumber("")
           })
           .catch(error => {
+            
             const message = {
               message: `Information of ${personObject.name} has already been removed from server`,
             }
@@ -63,6 +64,7 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName("")
           setNewNumber("")
+
           const message = {
             message: `Added ${personObject.name}`,
           }
@@ -70,7 +72,8 @@ const App = () => {
           setTimeout(() => {
             setNewMsg(null)
           }, 5000)
-        }).catch(error => {
+        })
+        .catch(error => {
 
           const message = {
             message: `${error.response.data.error}`,
