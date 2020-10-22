@@ -46,6 +46,7 @@ const App = () => {
           .catch(error => {
 
             const message
+
             if (error.response.data === null) {
               message = { message: `Information of ${personObject.name} has already been removed from the server` }
             }
