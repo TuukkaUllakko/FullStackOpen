@@ -44,17 +44,13 @@ const App = () => {
             setNewNumber("")
           })
           .catch(error => {
-            
-            const message = error.response.data.error
-            ? { message: `${error.response.data.error}` }
-            : { message: `Information for ${personObject.name} has already been removed from the server.` }
+
+            const message = { message: `${error.response.data.error}` }
 
             setNewErrmsg(message)
             setTimeout(() => {
               setNewErrmsg(null)
             }, 5000)
-            setNewName("")
-            setNewNumber("")
           })
       }
     }
@@ -87,54 +83,54 @@ const App = () => {
     }
   }
 
-    const deleteEntry = (id, name) => {
-      const result = window.confirm(`Delete ${name}?`);
-      let indexOfEntry = persons.map(person => person.id).indexOf(id)
-      if (result) {
-        phoneService
-          .deletePerson(id)
-          .then()
-        const personsCopy = [...persons]
-        personsCopy.splice(indexOfEntry, 1)
-        setPersons(personsCopy)
-      }
+  const deleteEntry = (id, name) => {
+    const result = window.confirm(`Delete ${name}?`);
+    let indexOfEntry = persons.map(person => person.id).indexOf(id)
+    if (result) {
+      phoneService
+        .deletePerson(id)
+        .then()
+      const personsCopy = [...persons]
+      personsCopy.splice(indexOfEntry, 1)
+      setPersons(personsCopy)
     }
-
-    const handleNameChange = (event) => {
-      setNewName(event.target.value)
-    }
-
-    const handleNumberChange = (event) => {
-      setNewNumber(event.target.value)
-    }
-
-    const handleFilterChange = (event) => {
-      setNewFilter(event.target.value)
-    }
-
-    return (
-      <div>
-        <h2>Phonebook</h2>
-
-        <AddedNotification message={newMsg} />
-        <ErrorNotification message={newErrMsg} />
-
-        <Filter value={newFilter} onChange={handleFilterChange} />
-
-        <h3>Add a new</h3>
-        <PersForm
-          onSubmit={addPerson}
-          newName={newName}
-          nameOnChange={handleNameChange}
-          newNumber={newNumber}
-          numberOnChange={handleNumberChange}
-        />
-
-        <h3>Numbers</h3>
-        <Persons persons={persons} filter={newFilter} onClick={deleteEntry} />
-      </div>
-    )
-
   }
-  
+
+  const handleNameChange = (event) => {
+    setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
+  }
+
+  const handleFilterChange = (event) => {
+    setNewFilter(event.target.value)
+  }
+
+  return (
+    <div>
+      <h2>Phonebook</h2>
+
+      <AddedNotification message={newMsg} />
+      <ErrorNotification message={newErrMsg} />
+
+      <Filter value={newFilter} onChange={handleFilterChange} />
+
+      <h3>Add a new</h3>
+      <PersForm
+        onSubmit={addPerson}
+        newName={newName}
+        nameOnChange={handleNameChange}
+        newNumber={newNumber}
+        numberOnChange={handleNumberChange}
+      />
+
+      <h3>Numbers</h3>
+      <Persons persons={persons} filter={newFilter} onClick={deleteEntry} />
+    </div>
+  )
+
+}
+
 export default App
