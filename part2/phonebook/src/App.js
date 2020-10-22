@@ -50,7 +50,7 @@ const App = () => {
               message = { message: `Information of ${personObject.name} has already been removed from the server` }
             }
             else {
-              message = { message: `${error.response.data.error}`}
+              message = { message: `${error.response.data.error}` }
             }
 
             setNewErrmsg(message)
