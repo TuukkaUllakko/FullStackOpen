@@ -72,16 +72,14 @@ describe('tests for missing properties', () => {
 
     const newBlog = {
       author: 'TestSubject',
-      likes: 68
     }
     await api
       .post('api/blogs')
       .send(newBlog)
       .expect(400)
 
-    const response = await api.get('/api/blogs')
-
-    expect(response.body).toHaveLength(initialBlogs.length)
+    const blogs = await Blog.find({})
+    expect(blogs).toHaveLength(initialBlogs.length)
   })
 })
 
