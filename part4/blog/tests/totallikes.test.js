@@ -94,7 +94,7 @@ describe('favourite blog', () => {
   })
 })
 
-/*describe('most blogs', () => {
+describe('most blogs', () => {
   test('returns the author with most blogs and the count of the blogs', () => {
 
     const result = listHelper.mostBlogs(listWithManyBlogs)
@@ -103,4 +103,4 @@ describe('favourite blog', () => {
       blogs: 3
     })
   })
-})*/
+})

@@ -1,4 +1,4 @@
-//const _ = require('lodash')
+const _ = require('lodash')
 
 const dummy = () => {
   return 1
@@ -25,22 +25,22 @@ const favouriteBlog = (blogs) => {
   )
 }
 
-/*const mostBlogs = (blogs) => {
+const mostBlogs = (blogs) => {
 
-  const { countBy, entries, flow, head, last, maxBy, partialRight } = _
-
-  const result = flow(
-    countBy,
-    entries,
-    partialRight(maxBy, last),
-    head
-  )(blogs)
+  const result =
+    _(blogs)
+      .countBy('author')
+      .entries('title')
+      .maxBy(_.last)
 
   return (
-    result
+    {
+      'author': result[0],
+      'blogs': result[1]
+    }
   )
-}*/
+}
 
 module.exports = {
-  dummy, totalLikes, favouriteBlog//, mostBlogs
+  dummy, totalLikes, favouriteBlog, mostBlogs
 }
