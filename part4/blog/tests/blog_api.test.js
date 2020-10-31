@@ -49,7 +49,30 @@ describe('the right amount of blogs is returned as json, and id is id', () => {
   })
 })
 
-describe('tests for missing properties', () => {
+describe('addition of a new blog', () => {
+  test('a valid blog can be added', async () => {
+    const newBlog = {
+      title: 'NewTitle',
+      author: 'NewAuthor',
+      url: 'NewURL',
+      likes: 6
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/api/blogs')
+
+    const contents = response.body.map(r => r.title)
+
+    expect(response.body).toHaveLength(initialBlogs.length + 1)
+    expect(contents).toContain(
+      'NewTitle'
+    )
+  })
 
   test('blog likes default to 0 if not given', async () => {
 
@@ -82,33 +105,35 @@ describe('tests for missing properties', () => {
     const blogs = await Blog.find({})
     expect(blogs).toHaveLength(initialBlogs.length)
   })*/
+
 })
 
-describe('adding a new blog works', () => {
-  test('a valid blog can be added', async () => {
-    const newBlog = {
-      title: 'NewTitle',
-      author: 'NewAuthor',
-      url: 'NewURL',
-      likes: 6
+/*describe('deleting and updating blogs', () => {
+  test('a note can be deleted', async () => {
+
+    const blogsInDb = async () => {
+      const blogs = await Blog.find({})
+      return blogs.map(blog => blog.toJSON())
     }
 
+    const blogsAtStart = await blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+  
     await api
-      .post('/api/blogs')
-      .send(newBlog)
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
-
-    const response = await api.get('/api/blogs')
-
-    const contents = response.body.map(r => r.title)
-
-    expect(response.body).toHaveLength(initialBlogs.length + 1)
-    expect(contents).toContain(
-      'NewTitle'
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .expect(204)
+  
+    const blogsAtEnd = await blogsInDb()
+  
+    expect(blogsAtEnd).toHaveLength(
+      initialBlogs.length - 1
     )
+  
+    const contents = blogsAtEnd.map(r => r.content)
+  
+    expect(contents).not.toContain(blogToDelete.content)
   })
-})
+})*/
 
 afterAll(() => {
   mongoose.connection.close()
