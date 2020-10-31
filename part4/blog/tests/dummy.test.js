@@ -1,5 +1,5 @@
 const listHelper = require('../utils/list_helper')
-
+jest.useFakeTimers()
 test('dummy returns one', () => {
   const blogs = []
 
