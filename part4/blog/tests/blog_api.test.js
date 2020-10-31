@@ -21,14 +21,11 @@ const initialBlogs = [
 ]
 beforeEach(async () => {
   await Blog.deleteMany({})
-  console.log('cleared')
 
-  initialBlogs.forEach(async (blog) => {
+  for (let blog of initialBlogs) {
     let blogObject = new Blog(blog)
     await blogObject.save()
-    console.log('saved')
-  })
-  console.log('done')
+  }
 })
 
 describe('the right amount of blogs is returned as json, and id is id', () => {
