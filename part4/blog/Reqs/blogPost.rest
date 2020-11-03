@@ -1,10 +1,10 @@
 POST http://localhost:3003/api/blogs
-Content-Type : application/json
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlZWt1cHBpIiwiaWQiOiI1ZmEwMmZmNjdlNmFjNzAyMTgwY2E3MjEiLCJpYXQiOjE2MDQ0MjI0MDN9.1tP-oVXSR8r07yNeq_r06Iu-_dZ-4lY3lluEINUFYJ4
 
 {
   "author": "Toinen",
-  "title": "Hohohohoho",
-  "url": "funnyuuuyyyy.com",
-  "likes": 3,
-  "userId": "5fa02ba9996eab28bc737157"
+  "title": "Kolmas TOisen",
+  "url": "toinenfunny.com",
+  "likes": 3
 }
