@@ -1,10 +1,10 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlR1dWtrYVUiLCJpZCI6IjVmYjAyMjc3N2UwYjlhMTQ1NDFhNDFiMSIsImlhdCI6MTYwNTM3ODc5OX0.nu_4quP3eRnNYiSt4cL1B5uxavFGqY8wyU-eYnj4MK4
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlR1dWtrYVUiLCJpZCI6IjVmYjAyMjc3N2UwYjlhMTQ1NDFhNDFiMSIsImlhdCI6MTYwNTc5ODc3Nn0.Qt_b-nxYYMvjLFP1snNXsgiDFrFE62dmoUE8lthcUyk
 
 {
-  "author": "Timothy Tight",
-  "title": "Non-existent blog",
-  "url": "doesntexist.com",
-  "likes": 7
+  "author": "BBBBBBB",
+  "title": "AAAAAAAAAAA",
+  "url": "CCCCCCCC.com",
+  "likes": 46
 }
