@@ -33,6 +33,15 @@ const App = () => {
     }
   }, [])
 
+  const sortedBlogs = (blogs) => {
+
+    const sorted = blogs.sort((a, b) => b.likes - a.likes)
+
+    return (
+      sorted
+    )
+  }
+
   const addBlog = (newBlogObject) => {
 
     blogFormRef.current.toggleVisibility()
@@ -48,12 +57,51 @@ const App = () => {
       })
       .catch(error => {
         console.log(error.response.data.error)
-        const message = { message: `${error.response.data.error}`}
+        const message = { message: `${error.response.data.error}` }
         setNewErrMsg(message)
         setTimeout(() => {
           setNewErrMsg(null)
         }, 3000)
       })
+  }
+
+  const updateBlog = (id, blogObject) => {
+    const updatedBlog = blogs.find(blog => blog.id === id)
+
+    blogService
+      .update(id, blogObject)
+      .then(returnedBlog => {
+        returnedBlog.user = updatedBlog.user
+        setBlogs(blogs.map(blog =>
+          blog.id !== id ? blog : returnedBlog))
+      })
+      .catch(error => {
+        console.log(error)
+        const message = { message: error }
+        setNewErrMsg(message)
+        setTimeout(() => {
+          setNewErrMsg(null)
+        }, 3000)
+      })
+  }
+
+  const deleteBlog = (id, title, author) => {
+    if (window.confirm(`Remove blog ${title} by ${author}?`)) {
+      let index = blogs.map(blog => blog.id).indexOf(id)
+
+      blogService
+        .deleteBlog(id)
+        .catch(error => {
+          const message = { message: error }
+          setNewErrMsg(message)
+          setTimeout(() => {
+            setNewErrMsg(null)
+          }, 3000)
+        })
+      const blogsCopy = [...blogs]
+      blogsCopy.splice(index, 1)
+      setBlogs(blogsCopy)
+    }
   }
 
   const handleLogin = async (event) => {
@@ -108,8 +156,8 @@ const App = () => {
             />
           </Togglable>
 
-          {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} />
+          {sortedBlogs(blogs).map(blog =>
+            <Blog key={blog.id} blog={blog} updateBlog={updateBlog} deleteBlog={deleteBlog} user={user} />
           )}
         </div>
       }
