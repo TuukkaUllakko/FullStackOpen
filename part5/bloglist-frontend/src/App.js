@@ -145,7 +145,7 @@ const App = () => {
         /> :
         <div>
           <p>{user.name} logged in
-          <button onClick={() => {
+            <button onClick={() => {
               window.localStorage.clear()
               setUser(null)
             }}>logout</button></p>
