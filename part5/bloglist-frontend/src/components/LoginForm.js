@@ -3,27 +3,30 @@ import PropTypes from 'prop-types'
 
 const LoginForm = (props) => {
   return (
-    <form onSubmit={props.handleLogin}>
-      <div>
-        username
-        <input
-          type="username"
-          value={props.username}
-          name="Username"
-          onChange={props.handleUsernameChange}
-        />
-      </div>
-      <div>
-        password
-        <input
-          type="password"
-          value={props.password}
-          name="Password"
-          onChange={props.handlePasswordChange}
-        />
-      </div>
-      <button type="submit">login</button>
-    </form>
+    <div>
+      <h2>Login to view blogs</h2>
+      <form onSubmit={props.handleLogin}>
+        <div>
+          username
+          <input
+            type="username"
+            value={props.username}
+            name="Username"
+            onChange={props.handleUsernameChange}
+          />
+        </div>
+        <div>
+          password
+          <input
+            type="password"
+            value={props.password}
+            name="Password"
+            onChange={props.handlePasswordChange}
+          />
+        </div>
+        <button type="submit">login</button>
+      </form>
+    </div>
   )
 }
 
