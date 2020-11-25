@@ -39,11 +39,11 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
         {blog.title} by {blog.author} <button id='view-button' onClick={() => setShowAll(true)}>View</button>
       </div>
       <div style={showShowAll} className='shown'>
-        {blog.title} by {blog.author} <button onClick={() => setShowAll(false)}>Hide</button>
+        {blog.title} by {blog.author} <button id='hide-button' onClick={() => setShowAll(false)}>Hide</button>
         <div>{blog.url}</div>
-        <div>Likes: {blog.likes} <button onClick={() => handleLike()}>Like!</button></div>
+        <div id='likes' >Likes: {blog.likes} <button id='like-button' onClick={() => handleLike()}>Like!</button></div>
         <div>Posted by: {blog.user.name}</div>
-        <div style={showRemoveButton}><button onClick={() => handleRemoval()}>Remove</button></div>
+        <div id='remove-button' style={showRemoveButton}><button onClick={() => handleRemoval()}>Remove</button></div>
       </div>
     </div>
   )
