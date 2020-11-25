@@ -84,7 +84,7 @@ describe('Blog app', function () {
       cy.get('html').should('not.contain', 'test blog title')
     })
 
-    it.only('Blogs are ordered by likes', function () {
+    it('Blogs are ordered by likes', function () {
       cy.contains('Add new blog').click()
       cy.get('#title').type('test blog title')
       cy.get('#author').type('test blog author')
