@@ -34,7 +34,7 @@ const reducer = (state = initialState, action) => {
         anecdote.id !== id ? anecdote : updatedAnecdote)
     }
     case 'ADD_NEW': {
-      const content = action.data.text
+      const content = action.data.content
       return [ ...state, asObject(content)]
     }
     default:
