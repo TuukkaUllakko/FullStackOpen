@@ -11,7 +11,7 @@ const notificationReducer = (state = '', action) => {
 
 export const showNotif = (notification) => {
   return {
-    type: 'SNOW_NOTIF',
+    type: 'SHOW_NOTIF',
     data: notification
   }
 }
