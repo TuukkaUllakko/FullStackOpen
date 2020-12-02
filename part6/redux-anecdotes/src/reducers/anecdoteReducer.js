@@ -34,8 +34,8 @@ const reducer = (state = initialState, action) => {
         anecdote.id !== id ? anecdote : updatedAnecdote)
     }
     case 'ADD_NEW': {
-      const content = action.data.content
-      return [ ...state, asObject(content)]
+      //const content = action.data.content
+      return [ ...state, action.data]
     }
     case 'INIT_ANECDOTES': {
       return action.data
@@ -46,10 +46,10 @@ const reducer = (state = initialState, action) => {
 
 }
 
-export const createAnecdote = (content) => {
+export const createAnecdote = (data) => {
   return {
     type: 'ADD_NEW',
-    data: { content }
+    data
   }
 }
 
