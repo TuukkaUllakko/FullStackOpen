@@ -18,7 +18,7 @@ const AnecdoteList = (props) => {
   const vote = (id, anecdote) => {
     props.addVote(id, anecdote)
     console.log(`You voted '${anecdote.content}'`)
-    props.showNotif(`You voted '${anecdote.content}'`, 3)
+    props.showNotif(`You voted '${anecdote.content}'`, 5)
   }
 
   return (
