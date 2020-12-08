@@ -169,9 +169,9 @@ const App = () => {
             <Anecdote anecdotes={anecdotes} />
           </Route>
 
-          <Router path="/create">
+          <Route path="/create">
             <CreateNew addNew={addNew} />
-          </Router>
+          </Route>
 
           <Route path="/about">
             <About />
