@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link, useParams
+  Switch, Route, Link, useParams, useHistory
 } from "react-router-dom"
 
 const Menu = () => {
@@ -63,11 +63,16 @@ const Footer = () => (
   </div>
 )
 
+let timeoutID
+
 const CreateNew = (props) => {
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
 
+  const history = useHistory()
+
+  clearTimeout(timeoutID)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -77,6 +82,7 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+    history.push('/')
   }
 
   return (
@@ -125,6 +131,13 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+
+    setNotification(`A new anecdote '${anecdote.content}' was created!`)
+
+    timeoutID = setTimeout(() => {
+      setNotification('')
+    }, 10000)
+
   }
 
   const anecdoteById = (id) =>
@@ -147,6 +160,9 @@ const App = () => {
         <h1>Software anecdotes</h1>
 
         <Menu />
+
+        {notification}
+
         <Switch>
 
           <Route path="/anecdotes/:id">
