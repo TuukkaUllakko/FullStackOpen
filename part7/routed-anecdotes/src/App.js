@@ -82,7 +82,7 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
-    history.push('/')
+    history.push("/")
   }
 
   return (
