@@ -8,12 +8,17 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import storage from './utils/storage'
 
+import { useDispatch } from 'react-redux'
+import { showNotif } from './reducers/notificationReducer'
+
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [notification, setNotification] = useState(null)
+  //const [notification, setNotification] = useState(null)
+
+  const dispatch = useDispatch()
 
   const blogFormRef = React.createRef()
 
@@ -28,13 +33,9 @@ const App = () => {
     setUser(user)
   }, [])
 
-  const notifyWith = (message, type='success') => {
-    setNotification({
-      message, type
-    })
-    setTimeout(() => {
-      setNotification(null)
-    }, 5000)
+  const notifyWith = (message, type = 'success') => {
+    const notif = { message, type }
+    dispatch(showNotif(notif, 5))
   }
 
   const handleLogin = async (event) => {
@@ -49,7 +50,7 @@ const App = () => {
       setUser(user)
       notifyWith(`${user.name} welcome back!`)
       storage.saveUser(user)
-    } catch(exception) {
+    } catch (exception) {
       notifyWith('wrong username/password', 'error')
     }
   }
@@ -60,7 +61,7 @@ const App = () => {
       blogFormRef.current.toggleVisibility()
       setBlogs(blogs.concat(newBlog))
       notifyWith(`a new blog '${newBlog.title}' by ${newBlog.author} added!`)
-    } catch(exception) {
+    } catch (exception) {
       console.log(exception)
     }
   }
@@ -69,7 +70,7 @@ const App = () => {
     const blogToLike = blogs.find(b => b.id === id)
     const likedBlog = { ...blogToLike, likes: blogToLike.likes + 1, user: blogToLike.user.id }
     await blogService.update(likedBlog)
-    setBlogs(blogs.map(b => b.id === id ?  { ...blogToLike, likes: blogToLike.likes + 1 } : b))
+    setBlogs(blogs.map(b => b.id === id ? { ...blogToLike, likes: blogToLike.likes + 1 } : b))
   }
 
   const handleRemove = async (id) => {
@@ -86,12 +87,12 @@ const App = () => {
     storage.logoutUser()
   }
 
-  if ( !user ) {
+  if (!user) {
     return (
       <div>
         <h2>login to application</h2>
 
-        <Notification notification={notification} />
+        <Notification />
 
         <form onSubmit={handleLogin}>
           <div>
@@ -122,13 +123,13 @@ const App = () => {
     <div>
       <h2>blogs</h2>
 
-      <Notification notification={notification} />
+      <Notification />
 
       <p>
         {user.name} logged in <button onClick={handleLogout}>logout</button>
       </p>
 
-      <Togglable buttonLabel='create new blog'  ref={blogFormRef}>
+      <Togglable buttonLabel='create new blog' ref={blogFormRef}>
         <NewBlog createBlog={createBlog} />
       </Togglable>
 
@@ -138,7 +139,7 @@ const App = () => {
           blog={blog}
           handleLike={handleLike}
           handleRemove={handleRemove}
-          own={user.username===blog.user.username}
+          own={user.username === blog.user.username}
         />
       )}
     </div>

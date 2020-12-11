@@ -1,7 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-const Notification = ({ notification }) => {
-  if ( !notification ) {
+const Notification = () => {
+
+  const notif = useSelector(state => state.notification)
+
+  if ( !notif ) {
     return null
   }
 
@@ -9,12 +13,12 @@ const Notification = ({ notification }) => {
     borderStyle: 'solid',
     borderRadius: 5,
     padding: 10,
-    color: notification.type === 'success' ? 'green' : 'red',
+    color: notif.type === 'success' ? 'green' : 'red',
     background: 'lightgrey'
   }
 
   return <div style={style}>
-    {notification.message}
+    {notif.message}
   </div>
 }
 
