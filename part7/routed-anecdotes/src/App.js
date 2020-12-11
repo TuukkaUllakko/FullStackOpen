@@ -84,6 +84,7 @@ const CreateNew = (props) => {
       info: info.value,
       votes: 0
     })
+    
     history.push("/")
   }
 
