@@ -80,6 +80,7 @@ const App = () => {
       await blogService.remove(id)
       setBlogs(blogs.filter(b => b.id !== id))
     }
+    notifyWith(`Removed blog: ${blogToRemove.title} by ${blogToRemove.author}!`)
   }
 
   const handleLogout = () => {
