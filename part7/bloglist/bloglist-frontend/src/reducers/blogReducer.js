@@ -5,17 +5,21 @@ const blogReducer = (state = [], action) => {
   console.log('action', action)
 
   switch (action.type) {
-  /*case 'VOTE': { //For next exercise
+  case 'LIKE': {
     const id = action.data.id
-    const anecdoteToBeUpdated = state.find(anec => anec.id === id)
-    const updatedAnecdote = { ...anecdoteToBeUpdated }
+    const blogToBeUpdated = state.find(blog => blog.id === id)
+    const updatedBlog = { ...blogToBeUpdated, likes: blogToBeUpdated.likes + 1 }
 
-    return state.map(anecdote =>
-      anecdote.id !== id ? anecdote : updatedAnecdote)
-  }*/
+    return state.map(blog =>
+      blog.id !== id ? blog : updatedBlog)
+  }
   case 'ADD_NEW': {
     //const content = action.data.content
     return [...state, action.data]
+  }
+  case 'DELETE': {
+    const id = action.data
+    return state.filter(blogs => blogs.id !== id)
   }
   case 'INIT_BLOGS': {
     return action.data
@@ -36,17 +40,25 @@ export const addNewBlog = (content) => {
   }
 }
 
-//Will probably need this for the next exercise
-/*export const addVote = (id, anecdote) => {
+export const likeBlog = (blog) => {
   return async dispatch => {
-    anecdote.votes++
-    const newAnecdote = await anecdoteService.update(id, anecdote)
+    const newBlog = await blogService.update(blog)
     dispatch({
-      type: 'VOTE',
-      data: newAnecdote
+      type: 'LIKE',
+      data: newBlog
     })
   }
-}*/
+}
+
+export const deleteBlog = (id) => {
+  return async dispatch => {
+    await blogService.remove(id)
+    dispatch({
+      type: 'DELETE',
+      data: id
+    })
+  }
+}
 
 export const initializeBlogs = () => {
   return async dispatch => {
