@@ -75,7 +75,7 @@ const App = () => {
     const ok = window.confirm(`Remove blog ${blogToRemove.title} by ${blogToRemove.author}`)
     if (ok) {
       dispatch(deleteBlog(blogToRemove.id))
-      notifyWith(`Removed blog: ${blogToRemove.title} by ${blogToRemove.author}!`)
+      notifyWith(`Removed blog: '${blogToRemove.title}' by '${blogToRemove.author}'!`)
     }
   }
 
