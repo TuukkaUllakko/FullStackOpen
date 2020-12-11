@@ -3,6 +3,7 @@ import Blog from './components/Blog'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import NewBlog from './components/NewBlog'
+import Users from './components/Users'
 
 import loginService from './services/login'
 import storage from './utils/storage'
@@ -11,6 +12,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { showNotif } from './reducers/notificationReducer'
 import { initializeBlogs, addNewBlog, likeBlog, deleteBlog } from './reducers/blogReducer'
 import { userLogin, userLogout } from './reducers/userReducer'
+
+import {
+  BrowserRouter as Router,
+  Switch, Route
+} from 'react-router-dom'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -118,29 +124,41 @@ const App = () => {
   const byLikes = (b1, b2) => b2.likes - b1.likes
 
   return (
-    <div>
-      <h2>blogs</h2>
+    <Router>
+      <div>
+        <h2>Blogs</h2>
 
-      <Notification />
+        <Notification />
 
-      <p>
-        {user.name} logged in <button onClick={handleLogout}>logout</button>
-      </p>
+        <p>
+          {user.name} logged in <button onClick={handleLogout}>logout</button>
+        </p>
 
-      <Togglable buttonLabel='create new blog' ref={blogFormRef}>
-        <NewBlog createBlog={createBlog} />
-      </Togglable>
+        <Switch>
 
-      {blogs.sort(byLikes).map(blog =>
-        <Blog
-          key={blog.id}
-          blog={blog}
-          handleLike={handleLike}
-          handleRemove={handleRemove}
-          own={user.username === blog.user.username}
-        />
-      )}
-    </div>
+          <Router path='/users'>
+            <Users />
+          </Router>
+
+          <Route path='/'>
+            <Togglable buttonLabel='create new blog' ref={blogFormRef}>
+              <NewBlog createBlog={createBlog} />
+            </Togglable>
+
+            {blogs.sort(byLikes).map(blog =>
+              <Blog
+                key={blog.id}
+                blog={blog}
+                handleLike={handleLike}
+                handleRemove={handleRemove}
+                own={user.username === blog.user.username}
+              />
+            )}
+          </Route>
+
+        </Switch>
+      </div>
+    </Router>
   )
 }
 
