@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import userService from '../services/users'
+import UserBlogs from './UserBlogs'
+
+import {
+  BrowserRouter as Router,
+  Switch, Route, Link
+} from 'react-router-dom'
 
 const Users = () => {
 
@@ -11,7 +17,7 @@ const Users = () => {
       .then(user => setUsers(user))
   })
 
-  const userNames = () => {
+  /*const userNames = () => { //Different way cause can't get these to work
     const usernames = users.map(user => {
       return (
         <div key={user.id}>
@@ -31,21 +37,37 @@ const Users = () => {
       )
     })
     return blogsCount
-  }
+  }*/
 
   return (
-    <div>
-      <h2>Users</h2>
-      <table>
-        <tbody>
-          <tr><td><b>Name:</b></td><td><b>Blogs created:</b></td></tr>
-          <tr>
-            <td>{userNames()}</td>
-            <td>{countBlogs()}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <Router>
+      <Switch>
+
+        <Route path='/users/:id'>
+          <UserBlogs users={users} />
+        </Route>
+
+        <Route path='/'>
+          <div>
+            <h2>Users</h2>
+            <table>
+              <tbody>
+                <tr><td><b>Name:</b></td><td><b>Blogs created:</b></td></tr>
+                {users.map(user => {
+                  return (
+                    <tr key={user.id}>
+                      <td><Link to={`/users/${user.id}`}>{user.name}</Link></td>
+                      <td>{user.blogs.length}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        </Route>
+
+      </Switch>
+    </Router>
   )
 }
 

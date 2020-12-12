@@ -136,9 +136,9 @@ const App = () => {
 
         <Switch>
 
-          <Router path='/users'>
+          <Route path='/users'>
             <Users />
-          </Router>
+          </Route>
 
           <Route path='/'>
             <Togglable buttonLabel='create new blog' ref={blogFormRef}>
